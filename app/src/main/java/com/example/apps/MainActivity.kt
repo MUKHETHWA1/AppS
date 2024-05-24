@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         var myRef = database.getReference("User")
 
         var user:User
-
+  var isMale:String
         savebutton.setOnClickListener {
       user=User(value1.text.toString(),value2.text.isEmpty())
             myRef.setValue(user)
@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-
-                displaytext.text=snapshot.value.toString()
+             isMale=if (value2.text.isEmpty())"Female" else "Male"
+                  displaytext.text = snapshot.child("name").value.toString() + " is a " + isMale
 
                 //to choose to dispkay
                 //displaytext.text=snapshot.child("0").value.toString()
